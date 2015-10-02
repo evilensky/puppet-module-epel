@@ -43,7 +43,8 @@ class epel (
   $epel_testing_debuginfo_failovermethod  = $epel::params::epel_testing_debuginfo_failovermethod,
   $epel_testing_debuginfo_proxy           = $epel::params::epel_testing_debuginfo_proxy,
   $epel_testing_debuginfo_enabled         = $epel::params::epel_testing_debuginfo_enabled,
-  $epel_testing_debuginfo_gpgcheck        = $epel::params::epel_testing_debuginfo_gpgcheck
+  $epel_testing_debuginfo_gpgcheck        = $epel::params::epel_testing_debuginfo_gpgcheck,
+  $epel_package_excludes
 ) inherits epel::params {
 
   if $::osfamily == 'RedHat' and $::operatingsystem !~ /Fedora|Amazon/ {
@@ -84,6 +85,7 @@ class epel (
       proxy          => $epel_proxy,
       enabled        => $epel_enabled,
       gpgcheck       => $epel_gpgcheck,
+      exclude        => $epel_package_excludes,
       gpgkey         => "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-${::operatingsystemmajrelease}",
       descr          => "Extra Packages for Enterprise Linux ${::operatingsystemmajrelease} - \$basearch",
     }
